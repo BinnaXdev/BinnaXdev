@@ -271,52 +271,69 @@ const translations = {
     }
 };
 
-// ========== Language Switcher ==========
-let currentLang = localStorage.getItem('language') || 'ar';
+// ========== Logic & UI ==========
 
-function setLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem('language', lang);
-    
-    // Update HTML lang and dir attributes
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    
-    // Update all translatable elements
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                element.placeholder = translations[lang][key];
-            } else {
-                element.textContent = translations[lang][key];
-            }
-        }
-    });
-    
-    // Update active language button
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-lang') === lang) {
-            btn.classList.add('active');
-        }
-    });
-    
-    // Adjust body class for RTL/LTR
-    document.body.classList.remove('rtl', 'ltr');
-    document.body.classList.add(lang === 'ar' ? 'rtl' : 'ltr');
-}
-
-// Initialize language on page load
 document.addEventListener('DOMContentLoaded', () => {
-    setLanguage(currentLang);
-    
-    // Add click events to language buttons
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
+    const langDropdown = document.getElementById('langDropdown');
+    const langOptions = document.getElementById('langOptions');
+    const currentFlag = document.getElementById('currentFlag');
+    const currentLangText = document.getElementById('currentLangText');
+    const langButtons = document.querySelectorAll('.lang-btn');
+
+    let currentLang = localStorage.getItem('language') || 'ar';
+
+    // 1. Function to switch language
+    const setLanguage = (lang) => {
+        localStorage.setItem('language', lang);
+        
+        // Update Document Direction & Language
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        document.body.classList.remove('rtl', 'ltr');
+        document.body.classList.add(lang === 'ar' ? 'rtl' : 'ltr');
+
+        // Update Translation Elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const translation = translations[lang][key];
+            if (translation) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = translation;
+                } else {
+                    el.textContent = translation;
+                }
+            }
+        });
+
+        // Update UI Dropdown Button
+        const selectedBtn = document.querySelector(`.lang-btn[data-lang="${lang}"]`);
+        if (selectedBtn) {
+            currentFlag.textContent = selectedBtn.querySelector('.flag').textContent;
+            currentLangText.textContent = selectedBtn.childNodes[selectedBtn.childNodes.length - 1].textContent.trim();
+            
+            // Highlight active in list
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            selectedBtn.classList.add('active');
+        }
+
+        langOptions.classList.remove('show');
+    };
+
+    // 2. Event Listeners
+    langDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langOptions.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => langOptions.classList.remove('show'));
+
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
             const lang = btn.getAttribute('data-lang');
             setLanguage(lang);
         });
     });
+
+    // 3. Initialize
+    setLanguage(currentLang);
 });
