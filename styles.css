@@ -220,7 +220,7 @@ button {
 }
 
 .nav-link.active {
-    background: #F0F0F0;
+    background: rgba(255, 255, 255, 0.15);
     color: #fdfdfe;
 }
 
@@ -308,15 +308,17 @@ button {
     padding: 16px 20px;
     font-size: 18px;
     font-weight: 600;
-    color: #fdfdfe;
-    background: #101a3d;
+
     border-radius: 12px;
     text-align: center;
     transition: all 0.2s ease;
+    color: #162353;
+    background: #ffffff;
+
 }
 
 .mobile-link:hover {
-    background: #101a3d;
+    background: #f5f5f5;
 }
 
 /* ========== Hero Section ========== */
@@ -806,7 +808,7 @@ section {
 
 /* ========== Portfolio Section ========== */
 .portfolio {
-    background: ##162353;
+    background: #162353;
 }
 
 .portfolio-grid {
@@ -1199,7 +1201,7 @@ section {
 
 .footer-bottom p {
     font-size: 14px;
-    color: #fdfdfe;
+    color: #737373;
 }
 
 .footer-social {
@@ -1258,7 +1260,7 @@ section {
 }
 /* Pulse animation for stat numbers */
 .stat-number {
-    animation: statPulse 2s ease-in-out infinite;
+    animation: statPulse 1s ease-in-out; 
 }
 
 @keyframes statPulse {

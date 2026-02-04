@@ -93,10 +93,11 @@ if (contactForm) {
         const currentLang = localStorage.getItem('language') || 'ar';
         const messages = {
             ar: {
-                sending: 'Ø¬Ø§Ø±ÙŠ Ø§Ù„Ø¥Ø±Ø³Ø§Ù„...',
-                success: 'ØªÙ… Ø¥Ø±Ø³Ø§Ù„ Ø±Ø³Ø§Ù„ØªÙƒ Ø¨Ù†Ø¬Ø§Ø­! Ø³Ù†ØªÙˆØ§ØµÙ„ Ù…Ø¹Ùƒ Ù‚Ø±ÙŠØ¨Ø§Ù‹.',
-                error: 'Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„Ø±Ø³Ø§Ù„Ø©. ÙŠØ±Ø¬Ù‰ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù…Ø±Ø© Ø£Ø®Ø±Ù‰.'
-            },
+                sending: 'جاري الإرسال......',
+                sending: 'جاري الإرسال...',
+        success: 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.',
+        error: 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.'
+                                },
             en: {
                 sending: 'Sending...',
                 success: 'Your message has been sent successfully! We will contact you soon.',

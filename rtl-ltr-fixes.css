@@ -1,0 +1,49 @@
+/* Quick RTL/LTR Fix */
+
+/* Force proper text direction */
+html[dir="ltr"] * {
+    direction: ltr;
+}
+
+html[dir="rtl"] * {
+    direction: rtl;
+}
+
+/* Override specific elements that should always be centered */
+html[dir="ltr"] .section-header,
+html[dir="rtl"] .section-header,
+html[dir="ltr"] .hero-content,
+html[dir="rtl"] .hero-content {
+    text-align: center;
+}
+
+/* Fix card alignment */
+html[dir="ltr"] .service-card,
+html[dir="ltr"] .about-card,
+html[dir="ltr"] .portfolio-card {
+    text-align: left;
+}
+
+html[dir="rtl"] .service-card,
+html[dir="rtl"] .about-card,
+html[dir="rtl"] .portfolio-card {
+    text-align: right;
+}
+
+/* Fix list items */
+html[dir="ltr"] .service-features li {
+    text-align: left;
+}
+
+html[dir="rtl"] .service-features li {
+    text-align: right;
+}
+
+/* Fix navbar */
+html[dir="ltr"] .navbar-content {
+    flex-direction: row;
+}
+
+html[dir="rtl"] .navbar-content {
+    flex-direction: row-reverse;
+}
